@@ -38,7 +38,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ position, onStart }) => {
           className="w-full h-20 xs:h-24 pink-gradient rounded-3xl flex flex-col items-center justify-center gap-1 shadow-2xl active:scale-95 transition-transform"
         >
           <span className="text-white text-xl font-black tracking-wider uppercase">INICIAR AGORA</span>
-          <span className="text-xs text-white/70 font-bold">ACESSO VITALÍCIO • R$ 19,90</span>
+          <span className="text-xs text-white/70 font-bold">ACESSO VITALÍCIO • R$ 14,90</span>
         </button>
       </div>
     </div>
