@@ -15,6 +15,7 @@ const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // Carregamento simulado para garantir que a interface monte corretamente
     const timer = setTimeout(() => setIsLoading(false), 800);
     return () => clearTimeout(timer);
   }, []);
@@ -37,6 +38,7 @@ const App: React.FC = () => {
   }, []);
 
   const handleStart = useCallback(() => {
+    // Link atualizado conforme solicitação para o checkout da Cakto
     window.location.href = 'https://pay.cakto.com.br/3fkn28t_741608';
   }, []);
 
