@@ -38,8 +38,8 @@ const App: React.FC = () => {
   }, []);
 
   const handleStart = useCallback(() => {
-    // Link atualizado conforme solicitação para o checkout da Cakto
-    window.location.href = 'https://pay.cakto.com.br/3fkn28t_741608';
+    // Link atualizado conforme solicitação
+    window.location.href = 'https://lunasutra.vercel.app/';
   }, []);
 
   if (isLoading) {
