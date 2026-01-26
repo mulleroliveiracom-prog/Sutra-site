@@ -1,5 +1,5 @@
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { AppState, Position } from './types';
 import { POSITIONS } from './constants';
 import Header from './components/Header';
@@ -12,16 +12,23 @@ const App: React.FC = () => {
   const [state, setState] = useState<AppState>('INTRO');
   const [hasSpun, setHasSpun] = useState(false);
   const [currentPosition, setCurrentPosition] = useState<Position | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const handleConfirmIntro = () => {
+  // Simula um carregamento inicial seguro para evitar flashes de tela preta
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleConfirmIntro = useCallback(() => {
     setState('HOME');
-  };
+  }, []);
 
   const handleSpin = useCallback(() => {
-    if (hasSpun) return;
+    if (hasSpun || state === 'SPINNING') return;
     setState('SPINNING');
     setHasSpun(true);
-  }, [hasSpun]);
+  }, [hasSpun, state]);
 
   const handleSpinFinish = useCallback(() => {
     const randomIndex = Math.floor(Math.random() * POSITIONS.length);
@@ -29,10 +36,24 @@ const App: React.FC = () => {
     setState('RESULT');
   }, []);
 
-  const handleStart = () => {
-    // Redireciona para a página de pagamento conforme solicitado
-    window.location.href = 'https://pay.cakto.com.br/3fkn28t_741608';
-  };
+  const handleStart = useCallback(() => {
+    // Redirecionamento direto para o checkout da Cakto
+    try {
+      window.location.href = 'https://pay.cakto.com.br/3fkn28t_741608';
+    } catch (error) {
+      console.error("Erro ao redirecionar para o pagamento:", error);
+      // Fallback em caso de erro de redirecionamento do browser
+      window.open('https://pay.cakto.com.br/3fkn28t_741608', '_self');
+    }
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="h-screen-fix bg-black flex items-center justify-center">
+        <div className="w-12 h-12 border-4 border-[#ff1a7d] border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="h-screen-fix bg-[#000000] flex flex-col items-center max-w-md mx-auto relative overflow-hidden">
@@ -44,7 +65,6 @@ const App: React.FC = () => {
             <Header />
             
             <div className="w-full flex flex-col items-center">
-              {/* Roulette Section */}
               <div className="relative py-8 w-full flex flex-col items-center">
                  <Roulette 
                   isSpinning={state === 'SPINNING'} 
@@ -69,7 +89,6 @@ const App: React.FC = () => {
                 </div>
               </div>
 
-              {/* SURPRESA 3D Section */}
               <div className="w-full px-6 space-y-6 mb-10">
                  <h2 className="text-[#ffb11a] text-3xl font-black italic text-center tracking-tighter">
                    SURPRESA 3D
@@ -90,7 +109,6 @@ const App: React.FC = () => {
                  </div>
               </div>
 
-              {/* BLOCKED DICE GAME Section */}
               <div className="w-full px-6 opacity-40 grayscale relative pb-10">
                  <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
                     <div className="bg-black/60 p-4 rounded-full border border-gray-700">

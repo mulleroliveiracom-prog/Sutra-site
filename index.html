@@ -19,7 +19,7 @@
             background-color: #000000;
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
-            overscroll-behavior-y: none; /* Prevents pull-to-refresh on mobile */
+            overscroll-behavior-y: none;
         }
         body {
             font-family: 'Inter', sans-serif;
@@ -39,8 +39,6 @@
         .card-shadow {
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
         }
-        
-        /* Smooth scrolling for mobile */
         .scroll-container {
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
@@ -48,8 +46,6 @@
         .scroll-container::-webkit-scrollbar {
             display: none;
         }
-
-        /* Support for dynamic viewport height (useful for mobile browsers) */
         @supports (height: 100dvh) {
             .h-screen-fix {
                 min-height: 100dvh;
@@ -64,14 +60,18 @@
 <script type="importmap">
 {
   "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
     "react": "https://esm.sh/react@^19.2.3",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/"
+    "vite": "https://esm.sh/vite@^7.3.1",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
   }
 }
 </script>
 </head>
 <body>
     <div id="root"></div>
+    <!-- Entry point crucial para evitar a tela preta no deploy -->
+    <script type="module" src="/index.tsx"></script>
 </body>
 </html>
