@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Luna Club Challenge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --app-height: 100%;
+        }
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: none; /* Prevents pull-to-refresh on mobile */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: white;
+            line-height: 1.5;
+        }
+        #root {
+            height: 100%;
+            width: 100%;
+        }
+        .bg-main-gradient {
+            background: linear-gradient(180deg, #0a0b14 0%, #000000 100%);
+        }
+        .pink-gradient {
+            background: linear-gradient(90deg, #ff1a7d 0%, #9c27b0 100%);
+        }
+        .card-shadow {
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+        }
+        
+        /* Smooth scrolling for mobile */
+        .scroll-container {
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Support for dynamic viewport height (useful for mobile browsers) */
+        @supports (height: 100dvh) {
+            .h-screen-fix {
+                min-height: 100dvh;
+            }
+        }
+        @supports not (height: 100dvh) {
+            .h-screen-fix {
+                min-height: 100vh;
+            }
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/"
+  }
+}
+</script>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>
