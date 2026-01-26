@@ -14,9 +14,8 @@ const App: React.FC = () => {
   const [currentPosition, setCurrentPosition] = useState<Position | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Simula um carregamento inicial seguro para evitar flashes de tela preta
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 500);
+    const timer = setTimeout(() => setIsLoading(false), 800);
     return () => clearTimeout(timer);
   }, []);
 
@@ -32,25 +31,20 @@ const App: React.FC = () => {
 
   const handleSpinFinish = useCallback(() => {
     const randomIndex = Math.floor(Math.random() * POSITIONS.length);
-    setCurrentPosition(POSITIONS[randomIndex]);
+    const selected = POSITIONS[randomIndex];
+    setCurrentPosition(selected);
     setState('RESULT');
   }, []);
 
   const handleStart = useCallback(() => {
-    // Redirecionamento direto para o checkout da Cakto
-    try {
-      window.location.href = 'https://pay.cakto.com.br/3fkn28t_741608';
-    } catch (error) {
-      console.error("Erro ao redirecionar para o pagamento:", error);
-      // Fallback em caso de erro de redirecionamento do browser
-      window.open('https://pay.cakto.com.br/3fkn28t_741608', '_self');
-    }
+    window.location.href = 'https://pay.cakto.com.br/3fkn28t_741608';
   }, []);
 
   if (isLoading) {
     return (
-      <div className="h-screen-fix bg-black flex items-center justify-center">
+      <div className="h-screen-fix bg-black flex flex-col items-center justify-center space-y-4">
         <div className="w-12 h-12 border-4 border-[#ff1a7d] border-t-transparent rounded-full animate-spin"></div>
+        <p className="text-[#ff1a7d] text-xs font-black tracking-widest uppercase">Luna Club</p>
       </div>
     );
   }
@@ -63,14 +57,12 @@ const App: React.FC = () => {
         <>
           <div className="w-full flex-1 overflow-y-auto scroll-container pb-36">
             <Header />
-            
             <div className="w-full flex flex-col items-center">
               <div className="relative py-8 w-full flex flex-col items-center">
                  <Roulette 
                   isSpinning={state === 'SPINNING'} 
                   onFinish={handleSpinFinish} 
                 />
-                
                 <div className="w-full px-6 mt-12 mb-8">
                   <button 
                     onClick={handleSpin}
@@ -90,22 +82,13 @@ const App: React.FC = () => {
               </div>
 
               <div className="w-full px-6 space-y-6 mb-10">
-                 <h2 className="text-[#ffb11a] text-3xl font-black italic text-center tracking-tighter">
+                 <h2 className="text-[#ffb11a] text-3xl font-black italic text-center tracking-tighter uppercase">
                    SURPRESA 3D
                  </h2>
-
                  <div className="bg-[#141625] rounded-[35px] p-8 border border-gray-800/50 card-shadow">
                     <p className="text-white/80 text-xl font-bold italic leading-tight text-center">
-                      O que deseja que seu par faça?
+                      Descubra o que o destino preparou para vocês hoje.
                     </p>
-                 </div>
-
-                 <div className="bg-[#141625] rounded-[25px] p-5 flex justify-between items-center border border-gray-800/50">
-                    <span className="text-[#9b9da3] text-xs font-black tracking-widest uppercase">NÚMERO DA SORTE</span>
-                    <div className="flex items-center gap-2 bg-[#0a0b14] px-4 py-2 rounded-xl border border-[#ffb11a]/30">
-                       <span className="text-[#ffb11a] text-xl font-black">1</span>
-                       <span className="text-[#ffb11a] text-xs">▼</span>
-                    </div>
                  </div>
               </div>
 
@@ -115,19 +98,17 @@ const App: React.FC = () => {
                       <span className="text-3xl">🔒</span>
                     </div>
                  </div>
-                 
                  <div className="bg-[#141625] rounded-[35px] p-6 border border-gray-800/50 flex flex-col items-center gap-4">
-                    <h3 className="text-white text-lg font-black italic tracking-tighter uppercase">JOGO DO DADO</h3>
+                    <h3 className="text-white text-lg font-black italic tracking-tighter uppercase">JOGOS EXCLUSIVOS</h3>
                     <div className="flex gap-4">
                       <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-3xl">🎲</div>
-                      <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-3xl">🎲</div>
+                      <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-3xl">🎴</div>
                     </div>
-                    <p className="text-xs text-gray-500 font-bold tracking-widest uppercase text-center">BLOQUEADO NO NÍVEL ATUAL</p>
+                    <p className="text-[10px] text-gray-500 font-bold tracking-widest uppercase text-center">DISPONÍVEL NO PLANO PREMIUM</p>
                  </div>
               </div>
             </div>
           </div>
-
           <BottomNav />
         </>
       )}
