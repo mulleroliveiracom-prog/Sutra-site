@@ -29,16 +29,15 @@ const ResultCard: React.FC<ResultCardProps> = ({ position, onStart }) => {
       </div>
 
       <div className="w-full mt-auto mb-10 space-y-4 shrink-0 flex flex-col items-center">
-        <p className="text-white/60 text-[11px] font-bold tracking-wider uppercase text-center max-w-[280px] leading-relaxed mb-2">
-          Clique em <span className="text-[#ff1a7d]">iniciar agora</span> para conhecer mais posições e jogos sexuais
+        <p className="text-white/60 text-[11px] font-bold tracking-wider uppercase text-center max-w-[300px] leading-relaxed mb-4">
+          Clique em <span className="text-[#ff1a7d]">iniciar agora</span> 🔥 “Ative agora a experiência que casais estão usando para sair da rotina”
         </p>
         
         <button 
           onClick={onStart}
-          className="w-full h-20 xs:h-24 pink-gradient rounded-3xl flex flex-col items-center justify-center gap-1 shadow-2xl active:scale-95 transition-transform"
+          className="w-full h-20 pink-gradient rounded-3xl flex items-center justify-center shadow-2xl active:scale-95 transition-transform"
         >
           <span className="text-white text-xl font-black tracking-wider uppercase">INICIAR AGORA</span>
-          <span className="text-xs text-white/70 font-bold">ACESSO VITALÍCIO • R$ 14,90</span>
         </button>
       </div>
     </div>
