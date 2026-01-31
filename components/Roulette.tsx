@@ -23,13 +23,13 @@ const Roulette: React.FC<RouletteProps> = ({ isSpinning, onFinish }) => {
   }, [isSpinning, onFinish]);
 
   return (
-    <div className="relative w-[280px] h-[280px] xs:w-[320px] xs:h-[320px] mx-auto flex items-center justify-center">
+    <div className="relative w-[260px] h-[260px] xs:w-[300px] xs:h-[300px] mx-auto flex items-center justify-center">
       {/* Pink Glow Background */}
-      <div className="absolute inset-0 bg-[#ff1a7d]/20 blur-[50px] rounded-full"></div>
+      <div className="absolute inset-0 bg-[#ff1a7d]/15 blur-[40px] rounded-full"></div>
       
       {/* Main Wheel */}
       <div 
-        className="relative w-full h-full rounded-full border-[6px] border-[#0a0b14] overflow-hidden transition-transform duration-[3.5s] cubic-bezier(0.15, 0, 0.15, 1) shadow-[0_0_40px_rgba(255,26,125,0.3)]"
+        className="relative w-full h-full rounded-full border-[6px] border-[#0a0b14] overflow-hidden transition-transform duration-[3.5s] cubic-bezier(0.15, 0, 0.15, 1) shadow-[0_0_40px_rgba(255,26,125,0.25)]"
         style={{ transform: `rotate(${rotation}deg)` }}
       >
         {/* Pink Slices */}
@@ -43,26 +43,25 @@ const Roulette: React.FC<RouletteProps> = ({ isSpinning, onFinish }) => {
               borderLeft: '1px solid rgba(0,0,0,0.1)'
             }}
           >
-             <span className="absolute left-[40%] top-[12%] -translate-x-1/2 rotate-90 text-[8px] font-black tracking-widest text-[#ff1a7d] opacity-50 uppercase select-none">
-               PLAY
+             <span className="absolute left-[40%] top-[12%] -translate-x-1/2 rotate-90 text-[7px] font-black tracking-widest text-white/40 uppercase select-none">
+               WIN
              </span>
           </div>
         ))}
 
         {/* Center Black Hub */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[30%] h-[30%] rounded-full bg-[#111111] flex items-center justify-center border-3 border-[#1a1a1a] shadow-2xl">
-            <span className="text-[#ffb11a] text-xs font-black italic tracking-widest -rotate-45 uppercase">LUNA</span>
-            <div className="absolute w-1.5 h-1.5 bg-[#ff1a7d]/40 rounded-full blur-[1px]"></div>
+          <div className="w-[28%] h-[28%] rounded-full bg-[#111111] flex items-center justify-center border-2 border-[#1a1a1a] shadow-2xl">
+            <span className="text-[#ffb11a] text-[10px] font-black italic tracking-widest -rotate-45 uppercase">LUNA</span>
           </div>
         </div>
       </div>
 
       {/* Pointer */}
-      <div className="absolute top-[-10px] left-1/2 -translate-x-1/2 z-30 flex flex-col items-center">
-        <div className="w-10 h-12 bg-white rounded-xl flex flex-col items-center justify-center shadow-lg relative overflow-hidden">
-            <div className="w-3 h-3 bg-[#ff1a7d] rounded-full shadow-[0_0_8px_rgba(255,26,125,0.8)]"></div>
-            <div className="absolute bottom-[-6px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[10px] border-t-white"></div>
+      <div className="absolute top-[-8px] left-1/2 -translate-x-1/2 z-30 flex flex-col items-center">
+        <div className="w-8 h-10 bg-white rounded-lg flex flex-col items-center justify-center shadow-lg relative overflow-hidden">
+            <div className="w-2.5 h-2.5 bg-[#ff1a7d] rounded-full"></div>
+            <div className="absolute bottom-[-5px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[8px] border-t-white"></div>
         </div>
       </div>
     </div>

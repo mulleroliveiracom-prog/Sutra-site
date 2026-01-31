@@ -19,7 +19,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ position, onStart }) => {
         </div>
       </div>
 
-      <div className="w-full bg-[#141625] rounded-[40px] p-8 flex flex-col items-center justify-center min-h-[220px] card-shadow border border-gray-800 text-center space-y-4 mb-8">
+      <div className="w-full bg-[#141625] rounded-[40px] p-8 flex flex-col items-center justify-center min-h-[220px] card-shadow border border-gray-800 text-center space-y-4 mb-8 animate-in slide-in-from-bottom duration-700">
         <h3 className="text-3xl font-black italic tracking-tight text-[#ffb11a] px-2 leading-snug">
           "{position.title}"
         </h3>
@@ -29,7 +29,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ position, onStart }) => {
       </div>
 
       <div className="w-full mt-auto mb-10 space-y-6 shrink-0 flex flex-col items-center">
-        <div className="bg-[#141625] border border-[#ffb11a]/20 p-5 rounded-3xl w-full text-center">
+        <div className="bg-[#141625] border border-[#ffb11a]/20 p-5 rounded-3xl w-full text-center shadow-[0_0_20px_rgba(255,177,26,0.05)]">
             <p className="text-[#ffb11a] text-xs font-black tracking-widest uppercase mb-2">🎁 DESCONTO EXCLUSIVO</p>
             <p className="text-white text-sm font-bold leading-tight">
               Você desbloqueou um desconto exclusivo: Leve o App Luna Sutra completo de <span className="line-through text-white/40">R$ 97</span> por apenas <span className="text-[#ff1a7d]">R$ 14,90</span>.
@@ -40,7 +40,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ position, onStart }) => {
           onClick={onStart}
           className="w-full h-20 pink-gradient rounded-3xl flex items-center justify-center shadow-[0_10px_30px_rgba(255,26,125,0.4)] active:scale-95 transition-transform"
         >
-          <span className="text-white text-lg font-black tracking-widest uppercase">QUERO MEU ACESSO AGORA</span>
+          <span className="text-white text-xl font-black tracking-widest uppercase">QUERO MEU ACESSO AGORA</span>
         </button>
       </div>
     </div>

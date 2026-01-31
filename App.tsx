@@ -8,14 +8,15 @@ import BottomNav from './components/BottomNav';
 import ResultCard from './components/ResultCard';
 
 const App: React.FC = () => {
-  // Alterado para HOME para remover o "Bem-vindo" inicial
+  // Inicia direto em HOME conforme solicitado para remover o "Bem-vindo"
   const [state, setState] = useState<AppState>('HOME');
   const [hasSpun, setHasSpun] = useState(false);
   const [currentPosition, setCurrentPosition] = useState<Position | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 500);
+    // Carregamento rápido para UX
+    const timer = setTimeout(() => setIsLoading(false), 400);
     return () => clearTimeout(timer);
   }, []);
 
@@ -33,7 +34,8 @@ const App: React.FC = () => {
   }, []);
 
   const handleStart = useCallback(() => {
-    window.location.href = 'https://lunasutra.vercel.app/';
+    // Link atualizado para o checkout solicitado
+    window.location.href = 'https://pay.cakto.com.br/3fkn28t_741608';
   }, []);
 
   if (isLoading) {
@@ -49,33 +51,44 @@ const App: React.FC = () => {
     <div className="h-screen-fix bg-[#000000] flex flex-col items-center max-w-md mx-auto relative overflow-hidden">
       {state !== 'RESULT' && (
         <>
-          <div className="w-full flex-1 flex flex-col overflow-hidden">
+          {/* O container principal permite rolagem, mas o conteúdo é distribuído para caber na tela */}
+          <div className="w-full flex-1 flex flex-col overflow-y-auto scroll-container pb-28">
             <Header />
-            <div className="flex-1 flex flex-col items-center justify-between py-2 px-6">
-              {/* Container da Roleta - ajustado para ocupar o espaço central disponível */}
-              <div className="relative w-full flex-1 flex items-center justify-center min-h-0">
+            
+            <div className="flex-1 flex flex-col items-center justify-center px-6 py-4 space-y-6">
+              {/* Roleta compacta para garantir visibilidade do botão abaixo */}
+              <div className="relative w-full flex items-center justify-center flex-shrink-0 py-2">
                  <Roulette 
                   isSpinning={state === 'SPINNING'} 
                   onFinish={handleSpinFinish} 
                 />
               </div>
 
-              {/* Container do Botão - posicionado para ser visível sem rolagem */}
-              <div className="w-full mt-4 mb-24">
+              {/* Botão de Girar - ajustado para ser o ponto focal sem rolagem */}
+              <div className="w-full flex-shrink-0">
                 <button 
                   onClick={handleSpin}
                   disabled={state === 'SPINNING' || hasSpun}
                   className={`w-full h-16 xs:h-20 rounded-[40px] flex items-center justify-center gap-4 transition-all transform active:scale-95 ${
                     hasSpun 
                       ? 'bg-gray-800 opacity-50 cursor-not-allowed' 
-                      : 'bg-[#e91e63] shadow-[0_8px_0px_#c2185b]'
+                      : 'bg-[#e91e63] shadow-[0_8px_0px_#c2185b] hover:brightness-110'
                   }`}
                 >
                   <span className="text-white text-2xl font-black tracking-widest uppercase">
                     {hasSpun ? 'USADO' : 'GIRAR'}
                   </span>
-                  <span className="text-2xl">🎰</span>
+                  <span className="text-2xl animate-pulse">🎰</span>
                 </button>
+              </div>
+
+              {/* Conteúdo adicional que pode ser acessado via scroll */}
+              <div className="w-full space-y-4 opacity-80">
+                 <div className="bg-[#141625] rounded-[25px] p-6 border border-gray-800/50">
+                    <p className="text-white/60 text-xs font-bold italic text-center uppercase tracking-widest">
+                      Desbloqueie o seu destino hoje
+                    </p>
+                 </div>
               </div>
             </div>
           </div>
