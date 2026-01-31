@@ -6,22 +6,17 @@ import Header from './components/Header';
 import Roulette from './components/Roulette';
 import BottomNav from './components/BottomNav';
 import ResultCard from './components/ResultCard';
-import IntroModal from './components/IntroModal';
 
 const App: React.FC = () => {
-  const [state, setState] = useState<AppState>('INTRO');
+  // Alterado para HOME para remover o "Bem-vindo" inicial
+  const [state, setState] = useState<AppState>('HOME');
   const [hasSpun, setHasSpun] = useState(false);
   const [currentPosition, setCurrentPosition] = useState<Position | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Carregamento simulado para garantir que a interface monte corretamente
-    const timer = setTimeout(() => setIsLoading(false), 800);
+    const timer = setTimeout(() => setIsLoading(false), 500);
     return () => clearTimeout(timer);
-  }, []);
-
-  const handleConfirmIntro = useCallback(() => {
-    setState('HOME');
   }, []);
 
   const handleSpin = useCallback(() => {
@@ -38,7 +33,6 @@ const App: React.FC = () => {
   }, []);
 
   const handleStart = useCallback(() => {
-    // Link atualizado conforme solicitação
     window.location.href = 'https://lunasutra.vercel.app/';
   }, []);
 
@@ -53,61 +47,35 @@ const App: React.FC = () => {
 
   return (
     <div className="h-screen-fix bg-[#000000] flex flex-col items-center max-w-md mx-auto relative overflow-hidden">
-      {state === 'INTRO' && <IntroModal onConfirm={handleConfirmIntro} />}
-
       {state !== 'RESULT' && (
         <>
-          <div className="w-full flex-1 overflow-y-auto scroll-container pb-36">
+          <div className="w-full flex-1 flex flex-col overflow-hidden">
             <Header />
-            <div className="w-full flex flex-col items-center">
-              <div className="relative py-8 w-full flex flex-col items-center">
+            <div className="flex-1 flex flex-col items-center justify-between py-2 px-6">
+              {/* Container da Roleta - ajustado para ocupar o espaço central disponível */}
+              <div className="relative w-full flex-1 flex items-center justify-center min-h-0">
                  <Roulette 
                   isSpinning={state === 'SPINNING'} 
                   onFinish={handleSpinFinish} 
                 />
-                <div className="w-full px-6 mt-12 mb-8">
-                  <button 
-                    onClick={handleSpin}
-                    disabled={state === 'SPINNING' || hasSpun}
-                    className={`w-full h-20 rounded-[40px] flex items-center justify-center gap-4 transition-all transform active:scale-95 ${
-                      hasSpun 
-                        ? 'bg-gray-800 opacity-50 cursor-not-allowed' 
-                        : 'bg-[#e91e63] shadow-[0_12px_0px_#c2185b]'
-                    }`}
-                  >
-                    <span className="text-white text-3xl font-black tracking-widest uppercase">
-                      {hasSpun ? 'USADO' : 'GIRAR'}
-                    </span>
-                    <span className="text-3xl">🎰</span>
-                  </button>
-                </div>
               </div>
 
-              <div className="w-full px-6 space-y-6 mb-10">
-                 <h2 className="text-[#ffb11a] text-3xl font-black italic text-center tracking-tighter uppercase">
-                   SURPRESA 3D
-                 </h2>
-                 <div className="bg-[#141625] rounded-[35px] p-8 border border-gray-800/50 card-shadow">
-                    <p className="text-white/80 text-xl font-bold italic leading-tight text-center">
-                      Descubra o que o destino preparou para vocês hoje.
-                    </p>
-                 </div>
-              </div>
-
-              <div className="w-full px-6 opacity-40 grayscale relative pb-10">
-                 <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
-                    <div className="bg-black/60 p-4 rounded-full border border-gray-700">
-                      <span className="text-3xl">🔒</span>
-                    </div>
-                 </div>
-                 <div className="bg-[#141625] rounded-[35px] p-6 border border-gray-800/50 flex flex-col items-center gap-4">
-                    <h3 className="text-white text-lg font-black italic tracking-tighter uppercase">JOGOS EXCLUSIVOS</h3>
-                    <div className="flex gap-4">
-                      <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-3xl">🎲</div>
-                      <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-3xl">🎴</div>
-                    </div>
-                    <p className="text-[10px] text-gray-500 font-bold tracking-widest uppercase text-center">DISPONÍVEL NO PLANO PREMIUM</p>
-                 </div>
+              {/* Container do Botão - posicionado para ser visível sem rolagem */}
+              <div className="w-full mt-4 mb-24">
+                <button 
+                  onClick={handleSpin}
+                  disabled={state === 'SPINNING' || hasSpun}
+                  className={`w-full h-16 xs:h-20 rounded-[40px] flex items-center justify-center gap-4 transition-all transform active:scale-95 ${
+                    hasSpun 
+                      ? 'bg-gray-800 opacity-50 cursor-not-allowed' 
+                      : 'bg-[#e91e63] shadow-[0_8px_0px_#c2185b]'
+                  }`}
+                >
+                  <span className="text-white text-2xl font-black tracking-widest uppercase">
+                    {hasSpun ? 'USADO' : 'GIRAR'}
+                  </span>
+                  <span className="text-2xl">🎰</span>
+                </button>
               </div>
             </div>
           </div>
