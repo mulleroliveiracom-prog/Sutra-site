@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Roulette from './components/Roulette';
 import BottomNav from './components/BottomNav';
 import ResultCard from './components/ResultCard';
+import PurchaseNotification from './components/PurchaseNotification';
 
 const App: React.FC = () => {
   // Inicia direto em HOME conforme solicitado para remover o "Bem-vindo"
@@ -34,8 +35,8 @@ const App: React.FC = () => {
   }, []);
 
   const handleStart = useCallback(() => {
-    // Link atualizado para o checkout solicitado
-    window.location.href = 'https://pay.cakto.com.br/3fkn28t_741608';
+    // Link atualizado para o checkout solicitado: TriboPay
+    window.location.href = 'https://go.tribopay.com.br/xj1wn1boik';
   }, []);
 
   if (isLoading) {
@@ -49,10 +50,13 @@ const App: React.FC = () => {
 
   return (
     <div className="h-screen-fix bg-[#000000] flex flex-col items-center max-w-md mx-auto relative overflow-hidden">
+      {/* Notificações em tempo real */}
+      <PurchaseNotification />
+
       {state !== 'RESULT' && (
         <>
           {/* O container principal permite rolagem, mas o conteúdo é distribuído para caber na tela */}
-          <div className="w-full flex-1 flex flex-col overflow-y-auto scroll-container pb-28">
+          <div className="w-full flex-1 flex flex-col overflow-y-auto scroll-container pb-28 pt-12">
             <Header />
             
             <div className="flex-1 flex flex-col items-center justify-center px-6 py-4 space-y-6">
